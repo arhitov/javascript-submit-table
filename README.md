@@ -13,6 +13,9 @@ User interface for interacting with table data.
 ## Requirements
 * bootstrap (5.0+)
 
+## Usage
+See [Example][link-example] folder. Also, you can ask me.
+
 ## Sponsor my work!
 If you think this package helped you in any way, you can sponsor me! I am a free developer, so your help will be very helpful to me. :blush:
 
