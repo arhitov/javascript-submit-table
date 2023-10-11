@@ -11,6 +11,7 @@ User interface for interacting with table data.
 * [ ] Deleting multiple lines
 
 ## Requirements
+* [base.js][link-javascript-helpers-base]
 * bootstrap (5.0+)
 
 ## Usage
@@ -33,3 +34,4 @@ Welcome here! :metal:
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg
 [link-license]: LICENSE.md
 [link-example]: example
+[link-javascript-helpers-base]: https://github.com/arhitov/javascript-helpers/blob/main/src/base.js

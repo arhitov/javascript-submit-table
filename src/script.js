@@ -1,8 +1,8 @@
 /**
-* Table UI - v0.1
-* URL: https://github.com/arhitov/javascript-submit-table
-* Author: Alexander Arhitov clgsru@gmail.com
-*/
+ * Table UI - v0.2
+ * URL: https://github.com/arhitov/javascript-submit-table
+ * Author: Alexander Arhitov clgsru@gmail.com
+ */
 (function () {
     "use strict";
 
@@ -101,59 +101,59 @@
                         resolve();
                     }
                 }))
-                .then(() => {
-                    const request_delete = thisTable.getAttribute('data-request_delete');
-                    fetch(request_delete.replace(':id:', id), {
-                        method: 'DELETE',
-                        headers: {
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    })
-                    .then(async response => {
-                        try {
-                            return {
-                                response: response,
-                                answer: await response.json()
-                            };
-                        } catch (e) {
-                            if ([200, 201, 202, 204].indexOf(response.status)) {
-                                return {
-                                    response: response,
-                                    answer: {
-
-                                    }
-                                };
-                            } else {
-                                console.error(e);
-                                throw new BreakError(`${response.status} ${response.statusText} ${response.url}`);
-                            }
-                        }
-                    })
-                    .then(data => {
-                        if (data.response.ok) {
-                            return {
-                                status: data.response.status,
-                                answer: data.answer
-                            };
-                        } else if (data.answer.message) {
-                            throw new BreakError(`${data.answer.message}`);
-                        } else {
-                            throw new BreakError(`${data.response.status} ${data.response.statusText} ${data.response.url}`);
-                        }
-                    })
                     .then(() => {
-                        displayRowSuccess(currentRow, newRowId, 'data-row_deleted_template', 'Row deleted!');
-                        currentRow.classList.add('d-none');
+                        const request_delete = thisTable.getAttribute('data-request_delete');
+                        fetch(request_delete.replace(':id:', id), {
+                            method: 'DELETE',
+                            headers: {
+                                'Accept': 'application/json',
+                                'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                            .then(async response => {
+                                try {
+                                    return {
+                                        response: response,
+                                        answer: await response.json()
+                                    };
+                                } catch (e) {
+                                    if ([200, 201, 202, 204].indexOf(response.status)) {
+                                        return {
+                                            response: response,
+                                            answer: {
+
+                                            }
+                                        };
+                                    } else {
+                                        console.error(e);
+                                        throw new BreakError(`${response.status} ${response.statusText} ${response.url}`);
+                                    }
+                                }
+                            })
+                            .then(data => {
+                                if (data.response.ok) {
+                                    return {
+                                        status: data.response.status,
+                                        answer: data.answer
+                                    };
+                                } else if (data.answer.message) {
+                                    throw new BreakError(`${data.answer.message}`);
+                                } else {
+                                    throw new BreakError(`${data.response.status} ${data.response.statusText} ${data.response.url}`);
+                                }
+                            })
+                            .then(() => {
+                                displayRowSuccess(currentRow, newRowId, 'data-row_deleted_template', 'Row deleted!');
+                                currentRow.classList.add('d-none');
+                            })
+                            .catch((error) => {
+                                displayRowError(currentRow, newRowId, error);
+                            });
                     })
                     .catch((error) => {
                         displayRowError(currentRow, newRowId, error);
                     });
-                })
-                .catch((error) => {
-                    displayRowError(currentRow, newRowId, error);
-                });
             });
         });
         return {
